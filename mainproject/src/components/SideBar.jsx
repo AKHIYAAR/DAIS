@@ -20,7 +20,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link } from 'react-router-dom'
 
 const drawerWidth = 240;
@@ -101,6 +100,11 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const logout=()=>{
+    window.localStorage.clear()
+    window.location.href='/login'
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -230,9 +234,8 @@ export default function MiniDrawer() {
             </ListItem>
         </List>
         <Divider style={{backgroundColor:"snow"}}/>
-        <List style={{color:"snow"}}>
         <ListItem disablePadding sx={{ display: 'block' }}>
-        <Link to={'/admin'} style={{color:'snow',  textDecoration:'none'}} >
+            <Link to={'/login'} style={{color:'snow',  textDecoration:'none'}} >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -247,14 +250,13 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <AdminPanelSettingsIcon style={{color:"snow"}}/>           
+                  <LoginIcon style={{color:"snow"}}/>           
                 </ListItemIcon>
-                <ListItemText primary={"Admin Login"} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={" Log Out"} sx={{ opacity: open ? 1 : 0 }} onClick={logout} />
               </ListItemButton>
               </Link>
             </ListItem>
-          
-        </List>
+        
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

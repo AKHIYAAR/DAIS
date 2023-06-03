@@ -1,0 +1,15 @@
+.sidebar {
+   
+    width: 180px;
+    border-right: 0.5px solid rgb(230, 227, 227);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+   
+}
+
+
+  
