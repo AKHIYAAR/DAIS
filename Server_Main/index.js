@@ -108,12 +108,14 @@ app.post("/login", async (req, res) => {
       if (!user) {
         return res.send({ error: "User not found" });
       }
-  
+      if(user.blocked){
+        return res.json({status:'blocked'})
+      }
       if (Password == user.Password) {
         const token = jwt.sign({}, JWT_SECRET);
   
         if (res.status(201)) {
-          return res.json({ status: "ok", data: token });
+          return res.json({ status: "ok", data: token, id:user._id });
         } else {
           return res.json({ error: "error" });
         }
@@ -129,18 +131,18 @@ app.post("/login", async (req, res) => {
 
 // Book Add
 app.post("/add_book", async (req, res) => {
- try{
- const book = new BookModels(req.body);
-console.log(req.body)
- if(book.$isValid()){
- await book.save()
- return res.send("Book added")
-}
- return res.send("Not added Book")
-}
- catch(err){
- console.log(err);
-}
+    try{
+        const book = new BookModels(req.body);
+        if(book.$isValid()){
+          var c = await book.save()
+          console.log(c);
+          return res.send(`Book added \n ${c} `)
+        }
+        return res.send("Not added Book")
+    }
+    catch(err){
+    console.log(err);
+    }
 })
 
 //user view
@@ -157,6 +159,7 @@ app.get('/viewuser', async (req, res) => {
 //user registration
 app.post('/register', async (req, res) => {
     const { FirstName, SecondName, Age, Dob, Address, PhoneNumber,Institution, Course, EmailId, Password } = req.body;
+    const blocked = false;
    
     try {
       const oldUser = await usermodel.findOne({EmailId });
@@ -176,6 +179,7 @@ app.post('/register', async (req, res) => {
     Course,
     EmailId,
     Password,
+    blocked
       });
   
       return res.send({ status: 'ok' });
@@ -195,4 +199,10 @@ app.put("/update", async (req, res) =>{
   const d = req.body;
   await usermodel.findOneAndUpdate({EmailId:d.EmailId}, d);
   res.send("done");
+})
+
+app.post("/block", async(req, res)=> {
+  const { id } = req.body;
+  var d = await usermodel.findOneAndUpdate({_id:id}, {blocked:true});
+  return res.send("done...")
 })

@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Box, Grid,Card, CardContent,Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import AdminBar from './AdminBar'
-
+import axios from 'axios';
 
 
 const Dashboard = () => {
+  const [user,  setUser] = useState([]);
+
+  useEffect(()=>{
+    axios.get("http://localhost:4000/viewuser")
+    .then((response)=>{
+      console.log(response.data)
+      setUser(response.data)
+    })
+    .catch((err)=>console.log(err))
+  },[])
+
+    const [books,  setBooks] = useState([]);
+  
+    useEffect(()=>{
+      axios.get("http://localhost:4000/viewbook")
+      .then((response)=>{
+        console.log(response.data)
+        setBooks(response.data)
+      })
+      .catch((err)=>console.log(err))
+    },[])
+
+
   return (
     <div><AdminBar/> 
     <div style={{padding:"100px"}}>
@@ -19,7 +42,7 @@ const Dashboard = () => {
     <Typography sx={{ fontSize: 30 }} color="text.secondary" gutterBottom>
       TOTAL USERS
     </Typography>
-    <Typography variant="h5">10</Typography>
+    <Typography variant="h5">{ user.length }</Typography>
   </CardContent>
   <Grid container justifyContent="flex-end" alignItems="center">
     <Grid item>
@@ -33,7 +56,7 @@ const Dashboard = () => {
         <Typography sx={{ fontSize: 30 }} color="text.secondary" gutterBottom>
           TOTAL BOOKS
         </Typography>
-        <Typography variant="h5">20</Typography>
+        <Typography variant="h5">{ books.length }</Typography>
        
         </CardContent >
         <Grid container justifyContent="flex-end" alignItems="center">

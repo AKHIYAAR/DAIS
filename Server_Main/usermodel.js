@@ -16,7 +16,8 @@ const userSchema = new Schema({
    Institution:String,
    Course:String,
    EmailId:String,
-   Password:String
+   Password:String,
+   blocked:Boolean
 });
 
 // model creation

@@ -9,7 +9,7 @@ import Book from './logo/Book.jpg'
 import { useNavigate } from 'react-router-dom';
 import Sidebar from './SideBar'
 
-const Home = () => {
+const Home = ({id}) => {
   const [blogs, setBlogs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -37,7 +37,7 @@ const Home = () => {
   
 
   return (
-    <div><Sidebar/>
+    <div><Sidebar id={id} />
     <div style={{ padding:'10vh' }}>
       <div style={{ position: 'relative' }}>
         <div style={{ position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1 }}>

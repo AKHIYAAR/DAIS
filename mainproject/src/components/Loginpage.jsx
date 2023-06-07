@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import Sidebar from './SideBar'
 
-const Loginpage = () => {
+const Loginpage = (props) => {
   const nav = useNavigate()
   const [data, setData] = useState({
     EmailId: '',
@@ -33,11 +33,12 @@ const Loginpage = () => {
       .then((data) => {
         console.log(data);
         if(data.status === 222){
-          return nav("/admin");
+          return nav("/dashboard");
         }
         if (data.status === "ok") {
           alert("Login Successful")
           window.localStorage.setItem("token", data.data)
+          props.setId(data.id);
           window.location.href = "/viewbook"
         }
         else {

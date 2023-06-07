@@ -12,6 +12,7 @@ import Dashboard from './components/Admin/Dashboard';
 import Members from './components/Admin/Members';
 import BookDetails from './components/Bookdetails';
 import UpdateForm from './components/Admin/UpdateForm';
+import { useState } from 'react';
 
 
 
@@ -23,6 +24,7 @@ import UpdateForm from './components/Admin/UpdateForm';
 
 function App() {
   {/*const [open, setOpen] = useState(false);*/}   
+  const [id, setId] = useState('')
   return (
     <div className="App">
       {/* <Loginpage></Loginpage> */}
@@ -46,16 +48,18 @@ function App() {
       <Routes>
        
          <Route path='/' element={<Homepage/>}></Route>
-        <Route path='/login' element={<Loginpage/>}></Route>
-        <Route path='/signup' element={<Signup/>}></Route>
-        <Route path='/viewbook' element={<Books2/>}></Route>
+        <Route path='/login' element={<Loginpage setId={setId} />}></Route>
+        <Route path='/signup' element={<Signup  />}></Route>
+        <Route path='/viewbook' element={<Books2 id={id} />}></Route>
         <Route path='/book/:id' element={<BookDetails/>}></Route> 
+
 
          <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/viewuser' element={<Members/>}></Route>
         <Route path='/books' element={<Books/>}></Route>
         <Route path='/addbooks' element={<AddBook/>}></Route> 
         <Route path='/update/:id' element={<UpdateForm/>}></Route> 
+        <Route path='/profile' element={ <UserProfile /> } />
 
 
       </Routes>

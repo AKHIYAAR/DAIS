@@ -1,13 +1,13 @@
 import { CardContent, Typography, Card, Button, Box, ButtonGroup } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import user from './logo/user.jpg';
 
 function BookDetails() {
   const [book, setBook] = useState();
   const [loading, setLoading] = useState(true);
-
+  const nav = useNavigate()
   const { id } = useParams();
 
   useEffect(() => {
@@ -95,7 +95,14 @@ function BookDetails() {
 
       <Button
         variant="contained"
-        sx={{ backgroundColor: 'white', color: 'black' }}>
+        sx={{ backgroundColor: 'white', color: 'black' }}
+        onClick={ () => {
+          alert("Borrowed")
+          nav("/viewbook")
+        } 
+        
+        }
+        >
         Borrow
       </Button>
        <Button

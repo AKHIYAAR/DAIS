@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -20,7 +20,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import GroupIcon from '@mui/icons-material/Group';
-
+import LoginIcon from '@mui/icons-material/Login';
 import { Link } from 'react-router-dom'
 
 const drawerWidth = 240;
@@ -102,6 +102,10 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const logout=()=>{
+    window.localStorage.clear()
+    window.location.href='/login'
+  }
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -230,6 +234,28 @@ export default function MiniDrawer() {
             </ListItem>
         </List>
         <Divider style={{backgroundColor:"snow"}}/>
+        <ListItem disablePadding sx={{ display: 'block' }}>
+            <Link to={'/login'} style={{color:'snow',  textDecoration:'none'}} >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <LoginIcon style={{color:"snow"}}/>           
+                </ListItemIcon>
+                <ListItemText primary={" Log Out"} sx={{ opacity: open ? 1 : 0 }} onClick={logout} />
+              </ListItemButton>
+              </Link>
+            </ListItem>
         
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

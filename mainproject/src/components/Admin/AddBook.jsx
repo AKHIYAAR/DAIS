@@ -3,10 +3,18 @@ import React,{useState} from 'react'
 import { Button,TextField, Typography,Box } from '@mui/material'
 // import AdminBar from './components/Admin/AdminBar';
 import AdminBar from './AdminBar'
+import axios from 'axios'
 
 
-const AddBook = (props) => {
-  var [inputs,setInputs]=useState(props.data)
+const AddBook = () => {
+  var [inputs,setInputs]=useState({
+  title:"",
+  author:"",
+  description:"",
+  publicationDate:"",
+  genre:"",
+  isbnNo:""
+  })
   
   const inputHandler=(e)=>{
     const{name,value}=e.target
@@ -14,7 +22,17 @@ const AddBook = (props) => {
 
   }
   const readValues = async()=>{
-    
+    console.log("Clicked");
+    console.log(inputs);
+    const method = "post"
+    if(method==="post"){
+      axios.post("http://localhost:4000/add_book",inputs)
+      .then(response=>{
+        alert("Success");
+        console.log(response)
+      })
+      .catch(err=>console.log(err))
+    }
   }
 
   return (
@@ -26,9 +44,9 @@ const AddBook = (props) => {
         <Typography variant='h4'>Add Book</Typography>
         <TextField style={{ margin: 9 }} color="error" label=" Title"  name='title' onChange={inputHandler} variant='filled'/>
         <TextField  style={{ margin: 9 }}color="error" label=" Author" name='author' onChange={inputHandler} variant='filled'/><br/>
-        <TextField style={{ margin: 9}}  color="error" label=" Description"  name=' description' onChange={inputHandler} variant='filled'/>
+        <TextField style={{ margin: 9}}  color="error" label=" Description"  name='description' onChange={inputHandler} variant='filled'/>
         <TextField  style={{ margin: 9 }}color="error" label=" Publication Date"  name='publicationDate' onChange={inputHandler} variant='filled'/><br/>
-        <TextField  style={{ margin: 9}} color="error" label=" Genere" name=' genre' onChange={inputHandler} variant='filled' />
+        <TextField  style={{ margin: 9}} color="error" label=" Genere" name='genre' onChange={inputHandler} variant='filled' />
         <TextField  style={{ margin: 9 }}color="error" label=" ISBN"  name='isbnNo' onChange={inputHandler} variant='filled'/><br/>
         <Button variant='contained' style={{ backgroundColor: "#AB0808", color: "white" }} onClick={readValues} >Submit</Button> 
         </Box>

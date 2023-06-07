@@ -70,6 +70,18 @@ const Members = () => {
                       }} >
                         Delete
                       </Button>
+                      <Button onClick={() => {
+                        axios.post("http://localhost:4000/block/", {id:value._id})
+                        .then((res)=> {
+                          console.log(res);
+                          alert("Blocked....")
+                        })
+                        .catch((err)=> {
+                          console.log(err)
+                        })
+                      }} >
+                        Block
+                      </Button>
                     </TableCell>
                     </TableRow>
                 )

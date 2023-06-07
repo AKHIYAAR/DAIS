@@ -89,7 +89,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer({id}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -165,7 +165,7 @@ export default function MiniDrawer() {
             </Link>
             </ListItem>
             <ListItem disablePadding sx={{ display: 'block' }}>
-            <Link style={{color:'snow',  textDecoration:'none'}} >
+            <Link to={'/profile/'+id} style={{color:'snow',  textDecoration:'none'}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -219,6 +219,7 @@ export default function MiniDrawer() {
                   px: 2.5,
                 }}
               >
+
                 <ListItemIcon
                   sx={{
                     minWidth: 0,

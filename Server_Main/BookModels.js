@@ -7,10 +7,6 @@ mongoose.connect(URL);
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-    bookId:{
-        type: Schema.Types.ObjectId,
-        require:true
-    },
     title:{
         type:String,
         require:true
@@ -28,7 +24,7 @@ const bookSchema = new Schema({
         require:true
     },
     genre:{
-        type:[String],
+        type:String,
         require:true,
     },
     isbnNo:{
@@ -47,6 +43,10 @@ const bookSchema = new Schema({
     image:{
         type:Buffer,
         default:null
+    },
+    avai:{
+        type:Boolean,
+        default:true
     }
 
 },
